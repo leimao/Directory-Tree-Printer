@@ -48,7 +48,7 @@ The executable file "tree_print" has been compiled on Ubuntu 16.04 using g++ 5.4
 
 ```shell
 find . | xargs ./tree_print
-find . | xargs ./tree_print > demo
+find . | xargs ./tree_print > demo.txt
 ```
 
 To compile the from the source code, simply run:
