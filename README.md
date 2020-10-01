@@ -8,10 +8,6 @@ Date: 1/14/2018
 
 Printing directory tree is useful to present the direcotry architectures. Such directory trees could often be used in GitHub projects.
 
-## Dependencies
-
-[Boost C++ Library](http://www.boost.org/)
-
 ## Demo
 
 This is the directory tree of the "Directory Tree Printer" folder.
