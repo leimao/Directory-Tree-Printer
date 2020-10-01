@@ -2,36 +2,25 @@
 #include <string>
 #include <iostream>
 #include <vector>
-#include <boost/tokenizer.hpp>
+#include <algorithm>	//for std::count
 
 using namespace std;
-using namespace boost;
-
 
 // Helper functions
 
 void read_dirs(int argc, char ** argv, Tree &tree)
 {
-	char_separator<char> sep("/");
-	typedef tokenizer<char_separator<char> > Token;
-
+	char sep('/');	//can be a string too, but considering generic paths, not having '\\'
 	for (int i = 1; i < argc; i++)
 	{
 		TreeNode treenode;
 
 		string dir = argv[i];
-		Token tokens(dir, sep);
-		unsigned int n_tokens = 0;
-		// Count tokens
-		vector<string> string_tokens;
-		for (Token::iterator it = tokens.begin(); it != tokens.end(); it++)
-		{
-			string_tokens.push_back(*it);
-			n_tokens ++;
-		}
 
-		treenode.depth = n_tokens - 1;
-		treenode.name = string_tokens[n_tokens-1];
+		string file_name = dir.substr( dir.find_last_of(sep) + 1 );	//getting the last token (eg. in "folder/file.txt" we get "file.txt" )
+
+		treenode.depth = count(dir.begin(), dir.end(), sep);	//counting number of '/'
+		treenode.name = file_name;
 
 		tree.treenodes.push_back(treenode);
 
