@@ -2,8 +2,6 @@
 
 Author: Lei Mao
 
-Date: 1/14/2018
-
 ## Introduction
 
 Printing directory tree is useful to present the direcotry architectures. Such directory trees could often be used in GitHub projects.
@@ -47,21 +45,26 @@ find . | xargs ./tree_print
 find . | xargs ./tree_print > demo.txt
 ```
 
-To compile the from the source code, simply run:
 
+## Building
+----
+### Linux
+To compile the from the source code, simply run:
 ```shell
 make
 ```
 
-## Caveats
-
-The name of folder and files should not have blanks. Because the program relies on the output from ```find``` command from Linux shell, and ```find``` could not correctly parsing the directory list to the C++ program arguments, there will be problems to present the directory structure containing blanks in the path. This might be fixed in the future if I have time.
+### Windows
+```shell
+cl /Zi /EHsc /std:c++17 /Fe: tree_print.exe *.cpp
+```
+> You may customize to add or remove args from the command
 
 ## Notes
+* You need a compiler supporting C++17
+* Linux has similar packages to present directory tree.
 
-Linux has similar packages to present directory tree.
-
-On Ubuntu:
-```shell
-sudo apt install tree
-```
+    On Ubuntu:
+    ```shell
+    sudo apt install tree
+    ```
