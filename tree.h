@@ -26,7 +26,6 @@ struct Tree
 };
 
 
-void read_dirs(int argc, char ** argv, Tree &tree);
-
+void read_dirs(const vector<string>& argv, Tree &tree, const string&);
 
 #endif
