@@ -1,6 +1,7 @@
 
 #include "tree.h"
 #include <iostream>
+#include <ostream>
 #include <vector>
 #include <fstream>
 #include <filesystem>
@@ -34,17 +35,24 @@ void get_allFiles(const path& root){
 
 int main(int argc, char** argv){
 	static path tree_root;
-	tree_root = argc >= 2 ? argv[1] : current_path();
+
+	tree_root = current_path();
+	if(argc > 1){
+		tree_root = argv[1];
+	}
+    string root_name = relative(tree_root, current_path()).generic_string();
+	current_path(tree_root);	//shift to the chosen directory, this helps the program to behave same whatever be the path, assigning that path as parent, and `cd` to it
 
 	#if GIT_IGNORE
 		gitIgnore(tree_root);
 	#endif
 
-	get_allFiles(tree_root);
+	get_allFiles(".");	//since we `cd` into the tree_root, we can simply start this function, irrespective of what the root_folder should have been
 
 	Tree tree;
 
-	read_dirs(files, tree);
+	read_dirs(files, tree, root_name);
+	// tree.print_tree_simple();
 	tree.print_tree();
 	return 0;
 
